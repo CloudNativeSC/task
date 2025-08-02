@@ -42,4 +42,5 @@ public class Category extends BaseTimeEntity {
     // 1:N 관계 - 하나의 카테고리는 여러 TaskTemplate을 가질 수 있음
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TaskTemplate> taskTemplates = new ArrayList<>();
+
 }

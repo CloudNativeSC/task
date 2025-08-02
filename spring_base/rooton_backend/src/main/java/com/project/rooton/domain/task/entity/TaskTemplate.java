@@ -75,5 +75,6 @@ public class TaskTemplate extends BaseTimeEntity {
                 .description(this.description)
                 .estimatedPomodoros(this.estimatedPomodoros)
                 .build();
+
     }
 }

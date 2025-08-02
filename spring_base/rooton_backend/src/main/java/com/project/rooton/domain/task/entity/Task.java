@@ -96,6 +96,7 @@ public class Task extends BaseTimeEntity {
         this.status = newStatus;
         if (newStatus == TaskStatus.COMPLETED && this.completedAt == null) {
             this.completedAt = LocalDateTime.now();
+
         }
     }
 }

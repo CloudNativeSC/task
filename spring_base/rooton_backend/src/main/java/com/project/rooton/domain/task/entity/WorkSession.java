@@ -94,5 +94,6 @@ public class WorkSession extends BaseTimeEntity {
             return (int) Duration.between(startTime, endTime).toMinutes();
         }
         return null;
+
     }
 }
