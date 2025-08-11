@@ -5,10 +5,12 @@ import com.project.rooton.domain.task.enums.Priority;
 import com.project.rooton.domain.task.enums.RecurringPattern;
 import com.project.rooton.domain.task.enums.TaskStatus;
 import com.project.rooton.domain.task.enums.TemplateType;
-import jakarta.persistence.*;
-import lombok.*;
 import com.project.rooton.global.entity.BaseTimeEntity;
 import com.project.rooton.domain.schedule.entity.ScheduleBlock;
+
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime; //수동 추가

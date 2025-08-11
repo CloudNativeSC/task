@@ -3,15 +3,12 @@ package com.project.rooton.domain.task.entity;
 import com.project.rooton.domain.task.enums.Priority;
 import com.project.rooton.domain.task.enums.RecurringPattern;
 import com.project.rooton.domain.task.enums.TaskStatus;
+import com.project.rooton.global.entity.BaseTimeEntity;
+
 import jakarta.persistence.*;
 import lombok.*;
-import com.project.rooton.global.entity.BaseTimeEntity;
-import com.project.rooton.domain.schedule.entity.ScheduleBlock;
-import java.util.ArrayList;
-import java.util.List;
-import java.time.LocalDateTime; //수동 추가
 
-
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks", indexes = {
@@ -29,10 +26,7 @@ public class Task extends BaseTimeEntity {
     private String id;
 
     @Column(name = "user_id", nullable = false)
-    private String userId;
-
-    @Column(name = "category_id", nullable = false)
-    private String categoryId;
+    private Long userId;
 
     @Column(nullable = false)
     private String title;
@@ -71,16 +65,8 @@ public class Task extends BaseTimeEntity {
 
     // N:1 관계 - 여러 Task는 하나의 Category에 속함
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-
-    // 1:N 관계 - 하나의 Task는 여러 WorkSession을 가질 수 있음
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkSession> workSessions = new ArrayList<>();
-
-    // 1:N 관계 - 하나의 Task는 여러 ScheduleBlock에서 사용될 수 있음
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
-    private List<ScheduleBlock> scheduleBlocks = new ArrayList<>();
 
     // 비즈니스 메소드
     public void markAsCompleted() {
@@ -96,8 +82,6 @@ public class Task extends BaseTimeEntity {
         this.status = newStatus;
         if (newStatus == TaskStatus.COMPLETED && this.completedAt == null) {
             this.completedAt = LocalDateTime.now();
-
         }
     }
 }
-

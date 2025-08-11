@@ -1,15 +1,13 @@
 package com.project.rooton.domain.task.entity;
 
 import com.project.rooton.domain.task.enums.*;
+import com.project.rooton.global.entity.BaseTimeEntity;
+
 import jakarta.persistence.*;
 import lombok.*;
-import com.project.rooton.global.entity.BaseTimeEntity;
-import com.project.rooton.domain.schedule.entity.ScheduleBlock;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.time.LocalDateTime; //수동 추가
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "work_sessions", indexes = {
@@ -63,7 +61,7 @@ public class WorkSession extends BaseTimeEntity {
     private Long userId;
 
     @Column(name = "task_id", nullable = false)
-    private Long taskId;
+    private String taskId;
 
     // N:1 관계 - 여러 WorkSession은 하나의 Task에 속함
     @ManyToOne(fetch = FetchType.LAZY)
@@ -94,6 +92,5 @@ public class WorkSession extends BaseTimeEntity {
             return (int) Duration.between(startTime, endTime).toMinutes();
         }
         return null;
-
     }
 }
